@@ -1,21 +1,18 @@
 package com.crm.qa.base;
 
+import com.crm.qa.util.TestUtil;
+import com.crm.qa.util.WebEventListener;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-
-import com.crm.qa.util.TestUtil;
-import com.crm.qa.util.WebEventListener;
-
 public class TestBase {
 	
 	public static WebDriver driver;
@@ -41,8 +38,10 @@ public class TestBase {
 		String browserName = prop.getProperty("browser");
 		
 		if(browserName.equals("chrome")){
-			System.setProperty("webdriver.chrome.driver", "/Users/Stricter/IdeaProjects/PageObjectModel/src/main/resources/chromedriver.exe");
-			driver = new ChromeDriver(); 
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+//			System.setProperty("webdriver.chrome.driver", "/Users/Stricter/IdeaProjects/PageObjectModel/src/main/resources/chromedriver.exe");
+//			driver = new ChromeDriver();
 		}
 		else if(browserName.equals("FF")){
 			System.setProperty("webdriver.gecko.driver", "/Users/Stricter/IdeaProjects/PageObjectModel/src/main/resourceschromedriver/chromedriver");
